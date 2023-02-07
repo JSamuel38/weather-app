@@ -17,15 +17,17 @@ function App() {
     }
   }, [location]);
 
-  const geoSuccess = async (pos) => {
-    const newURL = changeURL(pos.coords);
+  /*When we successfully obtain user's location we change the state of the location to a new
+  API URL*/
+  const geoSuccess = (pos) => {
+    const newURL = changeWeatherURL(pos.coords);
     setLocation(newURL);
   }
 
   const geoError = (err) => {
     console.error(err);
   }
-  //get users location, if not retrieved in 5 seconds, then display an error
+  //Get users location, if not retrieved in 5 seconds, then display an error
   const useUserLocation = () => {
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, {
       enableHighAccuracy: true,
@@ -33,15 +35,25 @@ function App() {
     });
   }
 
-  const changeURL = (newCoords) => {
-    const lat = newCoords.latitude;
-    const lon = newCoords.longitude;
+  const changeWeatherURL = (newCoords) => {
+    const lat = newCoords.latitude || newCoords.lat;
+    const lon = newCoords.longitude || newCoords.lon;
     return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m&hourly=rain&hourly=snowfall&hourly=windspeed_10m&hourly=cloudcover`
   }
+
+  //Get the latitude and longitude using geocode API and generate new URL and change state of location 
+  const geocodeAddress = async (address) => {
+    const response = await fetch(`https://geocode.maps.co/search?q=${address}`)
+    const data = await response.json();
+    const location = data[0];
+    const newURL = changeWeatherURL(location);
+    setLocation(newURL);
+  };
 
   return (
     <div className="App">
       <button onClick={useUserLocation}>Use my location</button>
+      <button onClick={() => geocodeAddress("pontefract")}>Geocode address</button>
     </div>
   );
 }
