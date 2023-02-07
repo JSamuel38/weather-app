@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
- 
+import SelectLocation from './components/SelectLocation';
+
 function App() {
   const [location, setLocation] = useState('https://api.open-meteo.com/v1/forecast?latitude=51.50&longitude=0.13&hourly=temperature_2m&hourly=rain&hourly=snowfall&hourly=windspeed_10m&hourly=cloudcover');
+  const [address, setAddress] = useState('');
 
   //Every time we change the location, we execute getData so we don't have to use .json() elsewhere
   useEffect(() => {
@@ -51,9 +53,13 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <button onClick={useUserLocation}>Use my location</button>
-      <button onClick={() => geocodeAddress("pontefract")}>Geocode address</button>
+    <div className="App grid place-content-center">
+      <SelectLocation 
+        useUserLocation={useUserLocation} 
+        geocodeAddress={geocodeAddress} 
+        address={address}
+        setAddress={setAddress}
+      />
     </div>
   );
 }
