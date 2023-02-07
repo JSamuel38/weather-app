@@ -1,3 +1,5 @@
+import { AiOutlineSearch } from 'react-icons/ai';
+
 const Geocode = ({ geocodeAddress, address, setAddress }) => {
   return (
     <form>
@@ -15,7 +17,7 @@ const Geocode = ({ geocodeAddress, address, setAddress }) => {
           e.preventDefault();
           geocodeAddress(address);
         }
-        }>Geocode address</button>
+        }><AiOutlineSearch size={'28'}/></button>
     </form>
   )
 }
