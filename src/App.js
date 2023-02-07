@@ -18,9 +18,24 @@ function App() {
     }
   }, [location]);
 
+  const geoSuccess = (pos) => {
+    console.log(pos);
+  }
+
+  const geoError = (err) => {
+    console.error(err);
+  }
+
+  const useUserLocation = () => {
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, {
+      enableHighAccuracy: true,
+      timeout: 5000
+    });
+  }
+
   return (
     <div className="App">
-      hello
+      <button onClick={useUserLocation}>Use my location</button>
     </div>
   );
 }
