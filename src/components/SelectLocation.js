@@ -3,7 +3,7 @@ import UserLocation from "./UserLocation"
 
 const SelectLocation = ({ useUserLocation, geocodeAddress, address, setAddress }) => {
   return (
-    <div className="grid">
+    <div className="grid place-content-center">
       <Geocode 
         geocodeAddress={geocodeAddress}
         address={address} 

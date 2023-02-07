@@ -60,7 +60,7 @@ function App() {
   };
 
   return (
-    <div className="App grid place-content-center">
+    <div className="App">
       <Weather weatherData={weatherData} />
       <SelectLocation
         useUserLocation={useUserLocation}
