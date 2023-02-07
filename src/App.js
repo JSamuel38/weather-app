@@ -45,18 +45,23 @@ function App() {
 
   //Get the latitude and longitude using geocode API and generate new URL and change state of location 
   const geocodeAddress = async (address) => {
-    const response = await fetch(`https://geocode.maps.co/search?q=${address}`)
-    const data = await response.json();
-    const location = data[0];
-    const newURL = changeWeatherURL(location);
-    setLocation(newURL);
+    try {
+      const response = await fetch(`https://geocode.maps.co/search?q=${address}`)
+      const data = await response.json();
+      const location = data[0];
+      if (!location) throw Error('No location found');
+      const newURL = changeWeatherURL(location);
+      setLocation(newURL);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div className="App grid place-content-center">
-      <SelectLocation 
-        useUserLocation={useUserLocation} 
-        geocodeAddress={geocodeAddress} 
+      <SelectLocation
+        useUserLocation={useUserLocation}
+        geocodeAddress={geocodeAddress}
         address={address}
         setAddress={setAddress}
       />
