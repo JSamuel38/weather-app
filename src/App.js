@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import SelectLocation from './components/SelectLocation';
+import Weather from './components/Weather';
 
 function App() {
   const [location, setLocation] = useState('https://api.open-meteo.com/v1/forecast?latitude=51.50&longitude=0.13&hourly=temperature_2m&hourly=rain&hourly=snowfall&hourly=windspeed_10m&hourly=cloudcover');
   const [address, setAddress] = useState('');
+  const [weatherData, setWeatherData] = useState({});
 
   //Every time we change the location, we execute getData so we don't have to use .json() elsewhere
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(location);
       const locationData = await response.json();
-      console.log(locationData);
+      setWeatherData(locationData);
     };
     try {
       getData();
@@ -59,6 +61,7 @@ function App() {
 
   return (
     <div className="App grid place-content-center">
+      <Weather weatherData={weatherData} />
       <SelectLocation
         useUserLocation={useUserLocation}
         geocodeAddress={geocodeAddress}
