@@ -6,6 +6,7 @@ function App() {
   const [location, setLocation] = useState('https://api.open-meteo.com/v1/forecast?latitude=51.50&longitude=0.13&hourly=temperature_2m&hourly=rain&hourly=snowfall&hourly=windspeed_10m&hourly=cloudcover');
   const [address, setAddress] = useState('');
   const [weatherData, setWeatherData] = useState({});
+  const [locationTime, setLocationTime] = useState('');
 
   //Every time we change the location, we execute getData so we don't have to use .json() elsewhere
   useEffect(() => {
@@ -13,6 +14,7 @@ function App() {
       const response = await fetch(location);
       const locationData = await response.json();
       setWeatherData(locationData);
+      locationTimeHandler(locationData);
     };
     try {
       getData();
@@ -58,6 +60,13 @@ function App() {
       console.error(err);
     }
   };
+
+  //Get the time of the requested location
+  const locationTimeHandler = async (location) => {
+    const response = await fetch(`http://api.geonames.org/timezoneJSON?lat=${location.latitude}&lng=${location.longitude}&username=jsamuel38`);
+    const data = await response.json();
+    setLocationTime(data.time);
+  }
 
   return (
     <div className="App">
