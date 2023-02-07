@@ -1,14 +1,15 @@
 import Geocode from "./Geocode"
+import UserLocation from "./UserLocation"
 
 const SelectLocation = ({ useUserLocation, geocodeAddress, address, setAddress }) => {
   return (
-    <div>
-      <button onClick={useUserLocation}>Use my location</button>
+    <div className="grid">
       <Geocode 
         geocodeAddress={geocodeAddress}
         address={address} 
         setAddress={setAddress} 
       />
+      <UserLocation useUserLocation={useUserLocation} />
     </div>
   )
 }
