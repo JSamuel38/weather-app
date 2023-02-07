@@ -3,7 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 const Geocode = ({ geocodeAddress, address, setAddress }) => {
   return (
     <form className="flex align-middle m-2">
-      <label htmlFor="location" className="hidden">Location</label>
+      <label htmlFor="location" className="absolute -left-full">Location</label>
       <input 
         type="text"
         id="location"
@@ -17,7 +17,7 @@ const Geocode = ({ geocodeAddress, address, setAddress }) => {
           e.preventDefault();
           geocodeAddress(address);
         }
-        }><AiOutlineSearch size={'28'}/></button>
+        }><AiOutlineSearch size={'28'} aria-label="search"/></button>
     </form>
   )
 }
