@@ -1,12 +1,18 @@
 const CurrentTemperature = ({ weatherData, locationTime, address }) => {
-  const time = new Date(locationTime).toLocaleString();
+    const currentHour = () => {
+    return (locationTime.slice(11, 12) === '0') ?  locationTime.slice(12, 13) : locationTime.slice(11, 13);
+  }
+
   return (
-    <div>
+    <div className="w-32 h-32 mt-6 mb-2 grid place-content-center border-solid border-2 border-black break-words self-center">
       <div>
-        {`${address} Local time: ${time.slice(0, 17)}`}
+        {address}
       </div>
       <div>
-        {weatherData.hourly ? `${Math.floor(weatherData.hourly.temperature_2m[0])}°C` : null}
+        {locationTime.slice(11)}
+      </div>
+      <div>
+        {weatherData.hourly ? `${Math.floor(weatherData.hourly.temperature_2m[currentHour()])}°C` : null}
       </div>
     </div>
   )

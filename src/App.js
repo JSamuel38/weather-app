@@ -36,7 +36,7 @@ function App() {
   }
 
   const geoError = (err) => {
-    console.error(err);
+    alert(err);
   }
   //Get users location, if not retrieved in 5 seconds, then display an error
   const useUserLocation = () => {
@@ -62,7 +62,7 @@ function App() {
       const newURL = changeWeatherURL(location);
       setLocation(newURL);
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   };
 

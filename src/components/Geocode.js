@@ -10,7 +10,7 @@ const Geocode = ({ geocodeAddress, address, setAddress }) => {
         placeholder="Tokyo"
         className="border-solid border-2 border-black p-1 mr-2"
         value={address}
-        onChange={(e) => setAddress(e.target.value)}
+        onChange={(e) => setAddress(e.target.value) }
       />
       <button
         onClick={(e) => {

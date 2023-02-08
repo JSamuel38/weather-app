@@ -23,12 +23,13 @@ const Weather = ({ weatherData, locationTime, address }) => {
     ) 
   }
   return (
-    <div className="border-solid border-black border-2 ">
+    <div className="border-solid border-black border-2 flex flex-col m-8">
       <CurrentTemperature 
         weatherData={weatherData}
         locationTime={locationTime}
         address={address}
       />
+      <h2 className="self-center text-xl font-semibold">Hourly temperatures</h2>
       <TemperatureList 
         weatherData={weatherData} 
         showTemps={showTemps}
