@@ -1,8 +1,8 @@
-const CurrentTemperature = ({weatherData}) => {
-  const currentTime = new Date();
+const CurrentTemperature = ({ weatherData, locationTime, address }) => {
+  const time = new Date(locationTime).toLocaleString();
   return (
     <div>
-      {currentTime.toLocaleTimeString().slice(0, 5)}
+      {`${address} Local time: ${time.slice(0, 17)}`}
     </div>
   )
 }

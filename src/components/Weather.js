@@ -1,7 +1,7 @@
 import TemperatureList from "./TemperatureList"
 import CurrentTemperature from "./CurrentTemperature";
 
-const Weather = ({ weatherData }) => {
+const Weather = ({ weatherData, locationTime, address }) => {
   const convertToDate = (time) => {
     const date = new Date(time);
     return date.toDateString();
@@ -26,7 +26,8 @@ const Weather = ({ weatherData }) => {
     <div className="border-solid border-black border-2 ">
       <CurrentTemperature 
         weatherData={weatherData}
-        convertToDate={convertToDate}
+        locationTime={locationTime}
+        address={address}
       />
       <TemperatureList 
         weatherData={weatherData} 

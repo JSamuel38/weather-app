@@ -14,6 +14,11 @@ function App() {
       const response = await fetch(location);
       const locationData = await response.json();
       setWeatherData(locationData);
+      const newAddressRes = await fetch(`https://geocode.maps.co/reverse?lat=${locationData.latitude}&lon=${locationData.longitude}`);
+      let newAddress = await newAddressRes.json();
+      newAddress = newAddress.display_name.split(',');
+      newAddress = newAddress[3] + ', ' + newAddress[newAddress.length - 1];
+      setAddress(newAddress);
       locationTimeHandler(locationData);
     };
     try {
@@ -70,7 +75,11 @@ function App() {
 
   return (
     <div className="App">
-      <Weather weatherData={weatherData} />
+      <Weather
+        weatherData={weatherData}
+        locationTime={locationTime}
+        address={address}
+      />
       <SelectLocation
         useUserLocation={useUserLocation}
         geocodeAddress={geocodeAddress}
